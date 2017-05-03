@@ -9,11 +9,12 @@ var SearchUser = React.createClass({
         e.preventDefault();
 
         GithubUser.getByUsername(this.refs.username.value).then(function(response){
-          console.log(response);
-        });
-        GithubUser.getResponseByUsername(this.refs.username.value).then(function(response){
-            console.log(response);
-        });
+            this.props.updateUser(response.data);
+        }.bind(this));
+
+        GithubUser.getResposByUsername(this.refs.username.value).then(function(response){
+            this.props.updateRepos(response.data);
+        }.bind(this));
     },
     render: function () {
         return(
